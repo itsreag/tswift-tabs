@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>player</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="cancel()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div *ngFor="let song of songs">
+  <ion-card class="music-card" *ngIf="song.title==cmSong">
+    <ion-card-header>
+      <img src="{{song.img}}"/>
+    </ion-card-header>
+    <ion-card-content text-center fullscreen="true" >
+      <h2>{{cmSong}}</h2>
+      <p></p>
+      <ion-item >
+        <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()" max="{{maxRangeValue}}"[(ngModel)]="currRangeTime"></ion-range>
+          <ion-text slot="start"><b>{{currSecsText}}</b></ion-text>
+          <ion-text slot="end"><b>{{durationText}}</b></ion-text>
+      </ion-item>
+
+      <!-- <ion-button color="dark" fill="clear" size="small">
+        <ion-icon slot="icon-only" name="shuffle"></ion-icon>
+      </ion-button> -->
+      <ion-button color="dark" fill="clear" size="large" (click)="playPrev()">
+        <ion-icon slot="icon-only" name="play-back"></ion-icon>
+      </ion-button>
+      <ion-button color="dark" fill="clear" class="button-largest" *ngIf="!isPlaying" (click)="playSong(song.title, song.subtitle, song.img, song.path)">
+        <ion-icon slot="icon-only" name="play"></ion-icon>
+      </ion-button>
+      <ion-button color="dark" fill="clear" class="button-largest" *ngIf="isPlaying" (click)="pause()">
+        <ion-icon slot="icon-only" name="pause"></ion-icon>
+      </ion-button>
+      <ion-button color="dark" fill="clear" size="large" (click)="playNext()">
+        <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+      </ion-button>
+      <!-- <ion-button color="dark" fill="clear" size="small">
+        <ion-icon slot="icon-only" name="repeat"></ion-icon>
+      </ion-button> -->
+
+      <div>
+        <ion-text style="white-space: pre-line">
+          My winter nights are taken up by static
+          Stress and holiday shopping traffic
+          But I close my?eyes?and I'm somewhere?else
+          Just like magic
+        </ion-text>
+      </div>
+    </ion-card-content>
+  </ion-card></div>
+
+</ion-content>

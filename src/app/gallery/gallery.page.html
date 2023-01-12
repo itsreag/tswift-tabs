@@ -1,0 +1,14 @@
+<ion-content>
+    <div class="top">
+      <div>
+          <ion-label>GALLERY</ion-label>
+      </div>
+    </div>
+    <div class="content-div">
+      <div class="images">
+        <div class="one-image" *ngFor="let image of images">
+          <img src="../../../assets/gallery/{{image}}">
+        </div>
+      </div>
+    </div>
+  </ion-content>

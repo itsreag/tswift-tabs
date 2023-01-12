@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+ion-content{
+    font-family:'Poppins', sans-serif;
+    --background:linear-gradient(#c277c9,#917bd3);
+    .top{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+        .menu-button{
+            ion-label{
+                color: #fff;
+                font: 24px;
+            }
+        }
+    }
+}
+.content-div{
+    background: white;
+    width:100%;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding: 20px;
+    padding-bottom: 50px;
+    height: auto;
+    @media(min-width: 0px){
+        .images{
+            column-count: 2;
+        }
+    }
+    @media(min-width: 620px){
+        .images{
+            column-count: 3;
+        }
+    }
+}

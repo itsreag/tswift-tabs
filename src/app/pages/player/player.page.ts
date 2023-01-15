@@ -12,20 +12,20 @@ export class PlayerPage implements OnInit {
   range!: IonRange;
   songs = [
     {
-      title: "Beautiful Ghosts",
+      title: "The Archer",
       subtitle: "01",
-      img: "/assets/album-cover/1.jpeg",
-      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
+      img: "/assets/album-cover/7.jpeg",
+      path: "/assets/song/The Archer.m4a"
     },{
-      title: "Both Of Us (ft. Taylor Swift)",
+      title: "Betty",
       subtitle: "02",
-      img: "/assets/album-cover/2.jpeg",
-      path: "/assets/song/01 Both Of Us (feat. Taylor Swift) (Music Explosion).m4a"
+      img: "/assets/album-cover/8.jpg",
+      path: "/assets/song/14 betty.m4a"
     },{
-      title: "Highway Don't Care (ft. Taylor Swift & Keith Urban)",
+      title: "Beautiful Ghosts",
       subtitle: "03",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/01 Highway Don't Care (feat. Taylor Swift & Keith Urban) (Music Explosion).m4a"
+      img: "/assets/gallery/197725.jpg",
+      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
     }
   ];
   // Current song details

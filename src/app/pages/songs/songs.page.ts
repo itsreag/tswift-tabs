@@ -30,7 +30,7 @@ export class SongsPage implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
-    this.songSelected=""; 
+    this.songSelected="";
     console.log(this.songSelected);
   }
   selectedSong(title:string){

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>songs</ion-title>
+    <ion-title>Songs</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,7 +10,7 @@
 <ion-content>
   <ion-item  *ngFor="let song of songs" (click)="selectedSong(song.title)">
     <!-- [routerLink]="['/','player','song.title']" -->
-   
+
     <ion-avatar slot="start">
       <img src="{{song.img}}" />
     </ion-avatar>

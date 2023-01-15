@@ -1,25 +1,113 @@
-ion-content{
-    font-family:'Poppins', sans-serif;
-    --background:linear-gradient(#c277c9,#917bd3);
-}
-.content-div{
-    background: white;
-    width:100%;
-    border-top-right-radius: 35px;
-    border-top-left-radius: 35px;
-    margin-top: 25px;
-    padding-top: 30px;
-    padding: 20px;
-    padding-bottom: 50px;
-    height: auto;
-}
+
 @media(min-width: 0px){
-    .images{
-        column-count: 1;
-    }
+  .images{
+      column-count: 1;
+  }
 }
 @media(min-width: 620px){
-    .images{
-        column-count: 3;
+  .images{
+      column-count: 3;
+  }
+}
+
+
+ion-header {
+
+
+
+  ion-item {
+    h3 {
+      font-weight: 700;
+      font-size: 14px;
     }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    ion-avatar {
+      --border-radius: 40%;
+    }
+  }
+
+}
+
+ion-content {
+  //--background: linear-gradient(90deg, rgba(43,90,148,1) 0%, rgba(45,112,229,1) 35%, rgba(45,112,229,1) 100%);
+  --background:linear-gradient(#c277c9,#917bd3);
+  .slides {
+    background: #f1f5f8;
+    padding: 4px 10px 40px 5px;
+    border-radius: 0px 0px 30px 30px;
+   //border-bottom-left-radius:  0px 0px 28px 28px;
+  }
+
+  ion-card {
+    width: 100% !important;
+    box-shadow: 10px 10px var(--ion-color-secondary);;
+    border-radius: 14px;
+    padding: 14px;
+    --background:linear-gradient(#c277c9,#917bd3);
+    .main {
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+      background: #FFFFFF;
+      box-shadow:  7px 7px 20px #dbdfe2,
+             -7px -7px 20px #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 30px;
+      }
+
+    }
+
+    .files {
+        padding-top: 14px;
+    }
+ion-card-title{
+  font-size: 16px;
+}
+ion-card-subtitle{
+  color: #FFFFFF;
+  font-size: 10px;
+}
+  }
+
+  .container {
+    padding: 6px 20px;
+    color: #FFFFFF;
+
+    ion-item {
+      --background: rgba(255,255,255,.1);
+      padding: 0;
+      margin: 14px 0;
+      --border-radius: 14px;
+      color: #FFFFFF;
+      font-weight: 600;
+
+      ion-label {
+        padding: 6px 0;
+
+        h4 {
+          font-weight: 600;
+          font-size: 16px;
+        }
+        h6 {
+          color: rgba(255,255,255,.66);
+        }
+      }
+
+    }
+
+    h2 {
+      padding-bottom: 8px;
+    }
+
+  }
+
 }

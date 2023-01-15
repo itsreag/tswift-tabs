@@ -17,12 +17,12 @@ export class PlayerPage implements OnInit {
       img: "/assets/album-cover/1.jpeg",
       path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
     },{
-      title: "Both Of Us (feat. Taylor Swift) (Music Explosion)",
+      title: "Both Of Us (ft. Taylor Swift)",
       subtitle: "02",
       img: "/assets/album-cover/2.jpeg",
       path: "/assets/song/01 Both Of Us (feat. Taylor Swift) (Music Explosion).m4a"
     },{
-      title: "Highway Don't Care (feat. Taylor Swift & Keith Urban)",
+      title: "Highway Don't Care (ft. Taylor Swift & Keith Urban)",
       subtitle: "03",
       img: "/assets/album-cover/3.jpeg",
       path: "/assets/song/01 Highway Don't Care (feat. Taylor Swift & Keith Urban) (Music Explosion).m4a"

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'gallery',
+    redirectTo: 'login-page',
     pathMatch: 'full'
   },
   {
@@ -82,10 +82,20 @@ const routes: Routes = [
   {
     path: 'album10',
     loadChildren: () => import('./album-page/album10/album10.module').then( m => m.Album10PageModule)
-  },  {
+  },
+  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
+  {
+    path: 'login-page',
+    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
+  },
+  {
+    path: 'sign-up-page',
+    loadChildren: () => import('./sign-up-page/sign-up-page.module').then( m => m.SignUpPagePageModule)
+  },
+
 
 
 

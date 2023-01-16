@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
+
 
 @Component({
   selector: 'app-gallery',
@@ -6,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gallery.page.scss'],
 })
 export class GalleryPage implements OnInit {
-  images = ['baby.jpg','bareface.jpg','folk1.jpg','folk2.jpg', 'folk5.jpg', 'folk10.jpg'
-  , 'folk11.jpg', 'folk13.jpg', 'folk16.jpg']
+  images:any=[]
   constructor() { }
 
   ngOnInit() {
+    const storage = getStorage();
+    const listref = ref(storage,'gallery');
+
+    listAll(listref)
+    .then((res)=>{
+      res.items.forEach((itemref)=>{
+        getDownloadURL(itemref)
+        .then((url)=>{
+          this.images.push(url);
+        });
+      });
+    });
   }
 
 }

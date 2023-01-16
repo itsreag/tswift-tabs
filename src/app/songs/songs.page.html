@@ -22,7 +22,7 @@
     <div class="slides ion-margin-bottom">
       <ion-slides [options]="slidesOptions">
         <ion-slide>
-          <ion-card >
+          <ion-card routerLink="/album1" >
             <img src="assets/album-cover/1.jpeg">
             <ion-card-header>
               <ion-card-subtitle>First Album</ion-card-subtitle>
@@ -30,19 +30,18 @@
             </ion-card-header>
           </ion-card>
         </ion-slide>
-  
+
         <ion-slide>
-          <ion-card >
+          <ion-card routerLink="/album2">
             <img src="assets/album-cover/2.jpeg">
             <ion-card-header>
               <ion-card-subtitle>Second Studio Album</ion-card-subtitle>
               <ion-card-title>Fearless</ion-card-title>
             </ion-card-header>
-  
           </ion-card>
         </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album3">
     <img src="assets/album-cover/3.jpeg">
     <ion-card-header>
       <ion-card-subtitle>Third Studio Album</ion-card-subtitle>
@@ -51,7 +50,7 @@
   </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album4">
       <img src="assets/album-cover/4.jpeg">
       <ion-card-header>
         <ion-card-subtitle>Forth Studio Album</ion-card-subtitle>
@@ -60,7 +59,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album5">
       <img src="assets/album-cover/5.jpeg">
       <ion-card-header>
         <ion-card-subtitle>Fifth Studio Album</ion-card-subtitle>
@@ -69,7 +68,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album6">
       <img src="assets/album-cover/6.jpeg">
       <ion-card-header>
         <ion-card-subtitle>Sixth Studio Album</ion-card-subtitle>
@@ -78,7 +77,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album7">
       <img src="assets/album-cover/7.jpeg">
       <ion-card-header>
         <ion-card-subtitle>Seventh Studio Album</ion-card-subtitle>
@@ -87,7 +86,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album8">
       <img src="assets/album-cover/8.jpg">
       <ion-card-header>
         <ion-card-subtitle>Eighth Studio Album</ion-card-subtitle>
@@ -96,7 +95,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card>
+    <ion-card routerLink="/album9">
       <img src="assets/album-cover/9.jpeg">
       <ion-card-header>
         <ion-card-subtitle>Ninth Studio Album</ion-card-subtitle>
@@ -105,7 +104,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide>
-    <ion-card >
+    <ion-card routerLink="/album10" >
       <img src="assets/album-cover/11.jpg">
       <ion-card-header>
         <ion-card-subtitle>Tenth Studio Album</ion-card-subtitle>
@@ -128,7 +127,15 @@
     </ion-label>
   </ion-item>
 <!-- full Player-->
+
   <div class="ion-text-center" id="fullPlayer">
+    <div class="mini" >
+    <ion-buttons color="dark" slot="end">
+      <ion-button  (click)="minimize()">
+      <ion-icon name="chevron-down-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    </div>
     <!-- Minimize Icon -->
     <img src="{{currImage}}" alt="" id="currImg">
 
@@ -159,13 +166,9 @@
           </ion-text>
         </ion-label>
       </ion-range>
+
     </ion-item>
 
-    <ion-buttons color="dark" slot="end">
-      <ion-button  (click)="minimize()">
-        <ion-icon   name="chevron-down-outline" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <!-- Play Previous Button -->
     <ion-button fill="clear" mode="ios" (click)="playPrev()">
       <ion-icon name="play-skip-back-outline" style="font-size: 30px;"></ion-icon>
@@ -206,6 +209,7 @@
   </div>
   </div>
 </ion-content>
+
 <!-- miniPlayer -->
 <ion-toolbar id="miniPlayer">
 
@@ -217,6 +221,19 @@
       <h2>{{currTitle}}</h2>
       <p>{{currSubtitle}}</p>
     </ion-label>
+
+    <ion-range #range (touchmove)="touchMove()" (touchend)="touchEnd()" (touchstart)="touchStart()"
+    max="{{maxRangeValue}}" [(ngModel)]="currRangeTime">
+
+    <ion-label slot="end">
+      <ion-text>
+        <b>
+          {{currSecsText}}
+        </b>
+      </ion-text>
+    </ion-label>
+  </ion-range>
+
     <!-- Play Button -->
     <ion-button (click)="play()" mode="ios" fill="clear" *ngIf="!isPlaying">
       <ion-icon name="play" style="font-size: x-large;"></ion-icon>
@@ -232,6 +249,4 @@
 
   </ion-item>
 
-  <!-- Song Progress Bar -->
-  <ion-progress-bar value="{{progress}}"></ion-progress-bar>
 </ion-toolbar>

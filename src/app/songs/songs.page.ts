@@ -1,86 +1,88 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild} from '@angular/core';
 import { IonRange } from "@ionic/angular";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-songs',
-  templateUrl: './songs.page.html',
-  styleUrls: ['./songs.page.scss'],
+  selector:'app-songs',
+  templateUrl:'./songs.page.html',
+  styleUrls:['./songs.page.scss']
 })
 export class SongsPage implements OnInit {
+  @ViewChild("range", { static: false }) range!: IonRange;
   songs = [
     {
-      title: "Believer",
-      subtitle: "Imagine Dragons",
-      img: "/assets/believer.jpg",
-      path: "/assets/songs/believer.mp3"
-    },
-    {
-      title: "Fifa 2010",
-      subtitle: "FIFA 2010 Theme Song",
-      img: "/assets/fifa.png",
-      path: "/assets/songs/fifa_2010.mp3"
-    },
-    {
-      title: "Thunder",
-      subtitle: "Imagine Dragons",
-      img: "/assets/thunder.jpg",
-      path: "/assets/songs/thunder.mp3"
+      title: "The Archer",
+      subtitle: "Lover",
+      img: "/assets/album-cover/7.jpeg",
+      path: "/assets/song/The Archer.m4a"
+    },{
+      title: "Betty",
+      subtitle: "folklore",
+      img: "/assets/album-cover/8.jpg",
+      path: "/assets/song/14 betty.m4a"
+    },{
+      title: "Beautiful Ghosts",
+      subtitle: "Singles",
+      img: "/assets/gallery/197725.jpg",
+      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
     }
   ];
-
-  @ViewChild("range", { static: false }) range: IonRange;
-
+  songSelected:any;
+  routes: any;
   //Current song details
-  currTitle: string;
-  currSubtitle: string;
-  currImage: string;
+  currTitle:any;
+  currSubtitle:any;
+  currImage:any;
+  // Progress bar value
+  progress = 0;
 
-  //progress bar value
-  progress: number = 0;
+  // Toggle for play/pause button
+  isPlaying=false;
 
-  //toggle for play/pause button
-  isPlaying: boolean = false;
+  //track ion-range touch
+  isTouched=false;
 
-  //track of ion-range touch
-  isTouched: boolean = false;
+  // ionrange texts
+  currSecsText:any;
+  durationText:any;
 
-  //ion range texts
-  currSecsText: string;
-  durationText: string;
+  // ionrange value;
 
-  //ion range value
-  currRangeTime: number;
-  maxRangeValue: number;
+  currRangeTime:any;
+  maxRangeValue:any;
 
-  //Current song
-  currSong: HTMLAudioElement;
+  // Up next songs
+  upNextTitle:any;
+  upNextSubtitle:any;
+  upNextImg:any;
 
-  //Upnext song details
-  upNextImg: string;
-  upNextTitle: string;
-  upNextSubtitle: string;
-
-  constructor() { }
-
+  currSong: any;
+  
+  constructor(public router:Router) { }
+  slidesOptions = {
+    slidesPerView: 1.5
+  }
   ngOnInit() {
   }
-
-  sToTime(t) {
+  
+  sToTime(t:any) {
     return this.padZero(parseInt(String((t / (60)) % 60))) + ":" +
       this.padZero(parseInt(String((t) % 60)));
   }
 
-  padZero(v) {
+  padZero(v:any) {
     return (v < 10) ? "0" + v : v;
   }
 
-  playSong(title, subTitle, img, song) {
+  playSong(title:any, subTitle:any, img:any, song:any) {
     if (this.currSong != null) {
       this.currSong.pause();     //If a song plays,stop that
     }
-
     //open full player view
-    document.getElementById("fullPlayer").style.bottom = "0px";
+    const full=document.getElementById('fullPlayer');
+    if (full != null){
+      full.style.bottom="0px";
+    }
     //set current song details
     this.currTitle = title;
     this.currSubtitle = subTitle;
@@ -117,7 +119,7 @@ export class SongsPage implements OnInit {
     this.currSong.addEventListener("timeupdate", () => {
 
       //update some infos as song plays on
-      //if ion-range not touched the do update 
+      //if ion-range not touched the do update
       if (!this.isTouched) {
 
         //update ion-range value
@@ -180,15 +182,27 @@ export class SongsPage implements OnInit {
       this.currSong.play();
     }
   }
-
+  //maximize player
   maximize() {
-    document.getElementById("fullPlayer").style.bottom = "0px";
-    document.getElementById("miniPlayer").style.bottom = "-100px";
+    const maxf = document.getElementById("fullPlayer");
+    if (maxf !=null){
+      maxf.style.bottom="0px";
+    }
+    const maxm=document.getElementById("miniPlayer");
+    if (maxm !=null){
+      maxm.style.bottom="-100px";
+    }
   }
-
+//minimize player
   minimize() {
-    document.getElementById("fullPlayer").style.bottom = "-1000px";
-    document.getElementById("miniPlayer").style.bottom = "0px";
+    const minf = document.getElementById("fullPlayer");
+    if (minf !=null){
+      minf.style.bottom="-1000px";
+    }
+    const minm=document.getElementById("miniPlayer");
+    if (minm !=null){
+      minm.style.bottom="0px";
+    }
   }
 
   pause() {
@@ -202,7 +216,10 @@ export class SongsPage implements OnInit {
   }
 
   cancel() {
-    document.getElementById("miniPlayer").style.bottom = "-100px";
+    const cancel = document.getElementById("miniPlayer");
+    if (cancel !=null){
+      cancel.style.bottom="-100px";
+    }
     this.currImage = "";
     this.currTitle = "";
     this.currSubtitle = "";
@@ -210,4 +227,10 @@ export class SongsPage implements OnInit {
     this.currSong.pause();
     this.isPlaying = false;
   }
+
+  logout(){
+    console.log("User Logout");
+    this.router.navigate(["/login-page"]);
+   }
 }
+

@@ -15,11 +15,7 @@ const routes: Routes = [
     path: 'gallery',
     loadChildren: () => import('./gallery/gallery.module').then( m => m.GalleryPageModule)
   },
-  {
-    path: 'album',
-    loadChildren: () => import('./album/album.module').then( m => m.AlbumPageModule)
-  },
-  {
+   {
     path: 'tracks',
     loadChildren: () => import('./tracks/tracks.module').then( m => m.TracksPageModule)
   },
@@ -30,18 +26,6 @@ const routes: Routes = [
   {
     path: 'card-new-rel',
     loadChildren: () => import('./pages/card-new-rel/card-new-rel.module').then( m => m.CardNewRelPageModule)
-  },
-  {
-    path: 'songs',
-    loadChildren: () => import('./pages/songs/songs.module').then( m => m.SongsPageModule)
-  },
-  {
-    path: 'player',
-    loadChildren: () => import('./pages/player/player.module').then( m => m.PlayerPageModule)
-  },
-  {
-    path: 'player/:song',
-    loadChildren: () => import('./pages/player/player.module').then( m => m.PlayerPageModule)
   },
   {
     path: 'album1',
@@ -95,9 +79,10 @@ const routes: Routes = [
     path: 'sign-up-page',
     loadChildren: () => import('./sign-up-page/sign-up-page.module').then( m => m.SignUpPagePageModule)
   },
-
-
-
+  {
+    path: 'songs',
+    loadChildren: () => import('./songs/songs.module').then( m => m.SongsPageModule)
+  },
 
 ];
 

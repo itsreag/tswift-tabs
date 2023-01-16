@@ -9,30 +9,21 @@
       column-count: 3;
   }
 }
-
-
 ion-header {
-
-
-
   ion-item {
     h3 {
       font-weight: 700;
       font-size: 14px;
     }
-
     p {
       font-weight: 500;
       font-size: 14px;
     }
-
     ion-avatar {
       --border-radius: 40%;
     }
   }
-
 }
-
 ion-content {
   //--background: linear-gradient(90deg, rgba(43,90,148,1) 0%, rgba(45,112,229,1) 35%, rgba(45,112,229,1) 100%);
   --background:linear-gradient(#c277c9,#917bd3);
@@ -42,10 +33,9 @@ ion-content {
     border-radius: 0px 0px 30px 30px;
    //border-bottom-left-radius:  0px 0px 28px 28px;
   }
-
   ion-card {
     width: 100% !important;
-    box-shadow: 10px 10px var(--ion-color-secondary);;
+   //box-shadow: 10px 10px var(--ion-color-secondary);;
     border-radius: 14px;
     padding: 14px;
     --background:linear-gradient(#c277c9,#917bd3);
@@ -59,13 +49,10 @@ ion-content {
       display: flex;
       align-items: center;
       justify-content: center;
-
       img {
         width: 30px;
       }
-
     }
-
     .files {
         padding-top: 14px;
     }
@@ -77,11 +64,9 @@ ion-card-subtitle{
   font-size: 10px;
 }
   }
-
   .container {
     padding: 6px 20px;
     color: #FFFFFF;
-
     ion-item {
       --background: rgba(255,255,255,.1);
       padding: 0;
@@ -89,10 +74,8 @@ ion-card-subtitle{
       --border-radius: 14px;
       color: #FFFFFF;
       font-weight: 600;
-
       ion-label {
         padding: 6px 0;
-
         h4 {
           font-weight: 600;
           font-size: 16px;
@@ -101,13 +84,59 @@ ion-card-subtitle{
           color: rgba(255,255,255,.66);
         }
       }
-
     }
-
     h2 {
       padding-bottom: 8px;
     }
-
   }
-
+  * {
+    font-weight: bold;
+}
+ion-item {
+    ion-thumbnail {
+        img {
+            border-radius: 10px;
+        }
+    }
+    ion-label {
+        h2,
+        p {
+            font-weight: bold;
+        }
+    }
+}
+#miniPlayer {
+    background: rgb(146, 69, 136);
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
+    transition: 0.5s;
+    bottom: -100px; //hide by default by setting bottom value in negative
+    ion-progress-bar {
+        z-index: 10;
+    }
+}
+#fullPlayer {
+    transition: 0.5s;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: rgb(63, 61, 61);
+    z-index: 20;
+    bottom: -1000px; //Hide by default by setting bottom value in negative
+    //Current Song Image
+    #currImg {
+        margin-top: 30px;
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+    }
+    p {
+        color: #8c8c8c;
+        margin: 0;
+    }
+    ion-text {
+        font-size: medium;
+    }
+}
 }

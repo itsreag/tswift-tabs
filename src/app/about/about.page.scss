@@ -18,6 +18,7 @@
     ion-card {
       position: relative;
       text-align: center;
+     
     }
 
     .card-title {
@@ -40,9 +41,23 @@
   }
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
   ion-content{
-      font-family:'Poppins', sans-serif;
-      --background:linear-gradient(#c277c9,#917bd3);
-  }
+    font-family:'Poppins', sans-serif;
+    --background:linear-gradient(#c277c9,#917bd3);
+    .top{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+        .menu-button{
+            ion-label{
+                color: #fff;
+                font: 24px;
+            }
+        }
+    }
+}
   ion-card img{
     height: 100%;
     width: 100%;

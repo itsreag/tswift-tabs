@@ -1,9 +1,10 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
-import { IonRange } from "@ionic/angular";
+import { IonRange,IonContent, Platform } from "@ionic/angular";
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import {Firestore,collection, collectionData} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { getStorage } from 'firebase/storage';
 
 export interface toprated {
   id?: string;
@@ -12,86 +13,16 @@ export interface toprated {
   path: string;
 }
 
-
 @Component({
   selector:'app-songs',
   templateUrl:'./songs.page.html',
   styleUrls:['./songs.page.scss']
 })
 export class SongsPage implements OnInit {
+  @ViewChild(IonContent) content!: IonContent;
   @ViewChild("range", { static: false }) range!: IonRange;
-  slide = [
-    {
-      title: "Speak Now",
-      subtitle: "Third Studio Album",
-      img: "/assets/album-cover/3.jpeg",
-    },
-    {
-      title: "Midnights",
-      subtitle: "Tenth Studio Album",
-      img: "/assets/album-cover/11.jpg",
-    },
-  ];
-  // songs = [
-  //   {
-  //     title: "The Archer",
-  //     subtitle: "Lover",
-  //     img: "/assets/album-cover/7.jpeg",
-  //     path: "/assets/song/The Archer.m4a"
-  //   },{
-  //     title: "Betty",
-  //     subtitle: "folklore",
-  //     img: "/assets/album-cover/8.jpg",
-  //     path: "/assets/song/14 betty.m4a"
-  //   },{
-  //     title: "Beautiful Ghosts",
-  //     subtitle: "Singles",
-  //     img: "/assets/gallery/197725.jpg",
-  //     path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
-  //   },{
-  //   title: "Back To December",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Back To December.mp3"
-  //   },
-  //   {
-  //     title: "Better Than Revenge",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Better Than Revenge.mp3"
-  //   },
-  //   {
-  //     title: "Dear John",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Dear John.mp3"
-  //   },
-  //   {
-  //     title: "Enchanted",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Enchanted.mp3"
-  //   },
-  //   {
-  //     title: "Haunted",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Haunted.mp3"
-  //   },
-  //   {
-  //     title: "If This Was A Movie",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/If This Was A Movie.mp3"
-  //   },
-  //   {
-  //     title: "Last Kiss",
-  //     subtitle: "Speak Now",
-  //     img: "/assets/album-cover/3.jpeg",
-  //     path: "/assets/song/Speak Now/Last Kiss.mp3"
-  //   }
-  // ];
-  
+  //bolean var for scroll to top[]
+  backToTop: boolean = false;
   songSelected:any;
   routes: any;
   //Current song details
@@ -125,15 +56,18 @@ export class SongsPage implements OnInit {
   myfolder:any;
   
   topratedSong:any=[];
-  constructor(public router:Router, private dataservice:DataService, private firestore:Firestore) {
+  chuchu:any=[];
+  constructor(public router:Router, private dataservice:DataService, private firestore:Firestore, public platform:Platform) {
     
   }
   slidesOptions = {
     slidesPerView: 1.5
   }
   ngOnInit() {
-    this.myfolder='Taylor Swift';
+    this.myfolder='toprated';
     this.readSongsFromDataService(this.myfolder);
+    // this.readPaths(this.myfolder);
+    // this.chuchu=this.dataservice.searchStorage(this.myfolder);
     // this.topratedSong = [];
   }
 
@@ -141,8 +75,25 @@ export class SongsPage implements OnInit {
     this.dataservice.getSong(folderref).subscribe((res)=>{
       this.topratedSong=res;
     });
-    console.log(folderref);
   }
+
+  
+
+  // readPaths(folder:string){
+  //   this.chuchu=this.dataservice.searchStorage(folder);
+  //   console.log(this.chuchu);
+  // }
+  //Scroll to top codes
+    getScrollPos(pos: number) {
+          if (pos > this.platform.height()) {
+               this.backToTop = true;
+          } else {
+               this.backToTop = false;
+          }
+     }
+     gotToTop() {
+      this.content.scrollToTop(1000);
+    }
 
   sToTime(t:any) {
     return this.padZero(parseInt(String((t / (60)) % 60))) + ":" +
@@ -233,7 +184,6 @@ export class SongsPage implements OnInit {
   playPrev() {
     // var index = this.songs.findIndex(x => this.topratedSong.id == this.currTitle);
     var index = this.topratedSong.findIndex((x: { id: any; })=>x.id==this.currTitle);
-    
     if (index == 0) {
       var lastIndex = this.topratedSong.length - 1;
       this.playSong(this.topratedSong[lastIndex].id, this.topratedSong[lastIndex].subtitle, this.topratedSong[lastIndex].imgpath, this.topratedSong[lastIndex].path);
@@ -308,10 +258,6 @@ export class SongsPage implements OnInit {
     this.currSong.pause();
     this.isPlaying = false;
   }
-  navAlbum(){
-    this.router.navigateByUrl('/album3');
-  }
-
   logout(){
     console.log("User Logout");
     this.router.navigate(["/login-page"]);

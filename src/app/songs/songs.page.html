@@ -67,12 +67,13 @@
   <!-- Songs List -->
   <div class="container">
     <h2>Music</h2>
-  <ion-item lines="none" *ngFor="let song of songs" (click)="maximize()" (click)="playSong(song.title,song.subtitle,song.img,song.path)">
+  <ion-item lines="none" *ngFor="let song of topratedSong"  (click)="playSong(song.id,song.subtitle,song.imgpath,song.path)">
+
     <ion-thumbnail slot="start">
-      <img src="{{song.img}}" />
+      <img src="{{song.imgpath}}" />
     </ion-thumbnail>
     <ion-label>
-      <h2>{{song.title}}</h2>
+      <h2>{{song.id}}</h2>
       <h6>{{song.subtitle}}</h6>
     </ion-label>
   </ion-item>

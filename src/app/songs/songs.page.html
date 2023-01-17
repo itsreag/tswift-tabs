@@ -25,7 +25,7 @@
 
     <!-- Speak Now 3 -->
 <ion-slide>
-  <ion-card (click)="readSongsFromDataService('Speak Now')">
+  <ion-card class="ion-text-capitalize"  (click)="readSongsFromDataService('Speak Now')">
   <img src="assets/album-cover/3.jpeg">
   <ion-card-header>
     <ion-card-subtitle>Third Studio Album</ion-card-subtitle>
@@ -39,7 +39,7 @@
           <img src="assets/album-cover/4.jpeg">
           <ion-card-header>
             <ion-card-subtitle>Forth Studio Album</ion-card-subtitle>
-            <ion-card-title>Red</ion-card-title>
+            <ion-card-title class="ion-text-capitalize" >Red</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-slide>
@@ -49,7 +49,7 @@
           <img src="assets/album-cover/8.jpg">
           <ion-card-header>
             <ion-card-subtitle>Eighth Studio Album</ion-card-subtitle>
-            <ion-card-title>folklore</ion-card-title>
+            <ion-card-title class="ion-text-capitalize" >folklore</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-slide>
@@ -59,7 +59,7 @@
           <img src="assets/album-cover/11.jpg">
           <ion-card-header>
             <ion-card-subtitle>Tenth Studio Album</ion-card-subtitle>
-            <ion-card-title>Midnights</ion-card-title>
+            <ion-card-title class="ion-text-capitalize" >Midnights</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-slide>
@@ -69,11 +69,13 @@
   <div class="container">
     <h2>Music</h2>
   <ion-item lines="none" *ngFor="let song of topratedSong" (click)="maximize()" (click)="playSong(song.id,song.subtitle,song.imgpath,song.path)">
-    <ion-thumbnail slot="start">
-      <img src="{{song.imgpath}}" />
-    </ion-thumbnail>
+    <!-- <ion-thumbnail slot="start"> -->
+      <!-- <img src="{{song.imgpath}}" /> -->
+      <ion-icon name="musical-notes" size="large" slot="start"></ion-icon>
+    <!-- </ion-thumbnail> -->
     <ion-label>
-      <h2>{{song.id}}</h2>
+      
+      <h2 class="ion-text-capitalize">{{song.id}}</h2>
       <h6>{{song.subtitle}}</h6>
     </ion-label>
   </ion-item>

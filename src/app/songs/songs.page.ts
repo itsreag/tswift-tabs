@@ -20,8 +20,78 @@ export interface toprated {
 })
 export class SongsPage implements OnInit {
   @ViewChild("range", { static: false }) range!: IonRange;
-
- 
+  slide = [
+    {
+      title: "Speak Now",
+      subtitle: "Third Studio Album",
+      img: "/assets/album-cover/3.jpeg",
+    },
+    {
+      title: "Midnights",
+      subtitle: "Tenth Studio Album",
+      img: "/assets/album-cover/11.jpg",
+    },
+  ];
+  songs = [
+    {
+      title: "The Archer",
+      subtitle: "Lover",
+      img: "/assets/album-cover/7.jpeg",
+      path: "/assets/song/The Archer.m4a"
+    },{
+      title: "Betty",
+      subtitle: "folklore",
+      img: "/assets/album-cover/8.jpg",
+      path: "/assets/song/14 betty.m4a"
+    },{
+      title: "Beautiful Ghosts",
+      subtitle: "Singles",
+      img: "/assets/gallery/197725.jpg",
+      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
+    },{
+    title: "Back To December",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Back To December.mp3"
+    },
+    {
+      title: "Better Than Revenge",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Better Than Revenge.mp3"
+    },
+    {
+      title: "Dear John",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Dear John.mp3"
+    },
+    {
+      title: "Enchanted",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Enchanted.mp3"
+    },
+    {
+      title: "Haunted",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Haunted.mp3"
+    },
+    {
+      title: "If This Was A Movie",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/If This Was A Movie.mp3"
+    },
+    {
+      title: "Last Kiss",
+      subtitle: "Speak Now",
+      img: "/assets/album-cover/3.jpeg",
+      path: "/assets/song/Speak Now/Last Kiss.mp3"
+    }
+  ];
+  
   songSelected:any;
   routes: any;
   //Current song details
@@ -229,6 +299,9 @@ export class SongsPage implements OnInit {
     this.progress = 0;
     this.currSong.pause();
     this.isPlaying = false;
+  }
+  navAlbum(){
+    this.router.navigateByUrl('/album3');
   }
 
   logout(){

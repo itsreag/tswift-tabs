@@ -57,14 +57,13 @@ export class SongsPage implements OnInit {
   upNextImg:any;
 
   currSong: any;
-  
   constructor(public router:Router) { }
   slidesOptions = {
     slidesPerView: 1.5
   }
   ngOnInit() {
   }
-  
+
   sToTime(t:any) {
     return this.padZero(parseInt(String((t / (60)) % 60))) + ":" +
       this.padZero(parseInt(String((t) % 60)));
@@ -190,7 +189,7 @@ export class SongsPage implements OnInit {
     }
     const maxm=document.getElementById("miniPlayer");
     if (maxm !=null){
-      maxm.style.bottom="-100px";
+      maxm.style.bottom="-1000px";
     }
   }
 //minimize player

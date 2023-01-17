@@ -16,7 +16,8 @@ export class DataService {
 
   constructor(private firestore:Firestore) {}
 
-  getSong():Observable<toprated[]>{
+  getSong(albumref:string):Observable<toprated[]>{
+    const album= albumref;
     const topratedRef = collection(this.firestore,'Album/toprated/playlist')
     return collectionData(topratedRef, {idField:'id'}) as Observable<toprated[]>
   }

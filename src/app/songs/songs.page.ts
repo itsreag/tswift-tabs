@@ -52,11 +52,11 @@ export class SongsPage implements OnInit {
   upNextImg:any;
 
   currSong: any;
+  
   topratedSong:any=[];
   constructor(public router:Router, private dataservice:DataService, private firestore:Firestore) {
     
   }
-  
   slidesOptions = {
     slidesPerView: 1.5
   }
@@ -66,8 +66,6 @@ export class SongsPage implements OnInit {
     });
   }
 
-  
-  
   sToTime(t:any) {
     return this.padZero(parseInt(String((t / (60)) % 60))) + ":" +
       this.padZero(parseInt(String((t) % 60)));
@@ -195,7 +193,7 @@ export class SongsPage implements OnInit {
     }
     const maxm=document.getElementById("miniPlayer");
     if (maxm !=null){
-      maxm.style.bottom="-100px";
+      maxm.style.bottom="-1000px";
     }
   }
 //minimize player

@@ -25,7 +25,7 @@
 
       <!-- Speak Now 3 -->
   <ion-slide>
-    <ion-card routerLink="/album3">
+    <ion-card (click)="readSongsFromDataService('Speak Now')">
     <img src="assets/album-cover/3.jpeg">
     <ion-card-header>
       <ion-card-subtitle>Third Studio Album</ion-card-subtitle>
@@ -35,7 +35,7 @@
   </ion-slide>
       <!-- Red-4 -->
         <ion-slide>
-          <ion-card routerLink="/album4">
+          <ion-card (click)="readSongsFromDataService('Red')">
             <img src="assets/album-cover/4.jpeg">
             <ion-card-header>
               <ion-card-subtitle>Forth Studio Album</ion-card-subtitle>
@@ -45,7 +45,7 @@
         </ion-slide>
       <!-- folklore 8 -->
         <ion-slide>
-          <ion-card routerLink="/album8">
+          <ion-card (click)="readSongsFromDataService('folklore')">
             <img src="assets/album-cover/8.jpg">
             <ion-card-header>
               <ion-card-subtitle>Eighth Studio Album</ion-card-subtitle>

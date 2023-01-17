@@ -32,65 +32,65 @@ export class SongsPage implements OnInit {
       img: "/assets/album-cover/11.jpg",
     },
   ];
-  songs = [
-    {
-      title: "The Archer",
-      subtitle: "Lover",
-      img: "/assets/album-cover/7.jpeg",
-      path: "/assets/song/The Archer.m4a"
-    },{
-      title: "Betty",
-      subtitle: "folklore",
-      img: "/assets/album-cover/8.jpg",
-      path: "/assets/song/14 betty.m4a"
-    },{
-      title: "Beautiful Ghosts",
-      subtitle: "Singles",
-      img: "/assets/gallery/197725.jpg",
-      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
-    },{
-    title: "Back To December",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Back To December.mp3"
-    },
-    {
-      title: "Better Than Revenge",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Better Than Revenge.mp3"
-    },
-    {
-      title: "Dear John",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Dear John.mp3"
-    },
-    {
-      title: "Enchanted",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Enchanted.mp3"
-    },
-    {
-      title: "Haunted",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Haunted.mp3"
-    },
-    {
-      title: "If This Was A Movie",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/If This Was A Movie.mp3"
-    },
-    {
-      title: "Last Kiss",
-      subtitle: "Speak Now",
-      img: "/assets/album-cover/3.jpeg",
-      path: "/assets/song/Speak Now/Last Kiss.mp3"
-    }
-  ];
+  // songs = [
+  //   {
+  //     title: "The Archer",
+  //     subtitle: "Lover",
+  //     img: "/assets/album-cover/7.jpeg",
+  //     path: "/assets/song/The Archer.m4a"
+  //   },{
+  //     title: "Betty",
+  //     subtitle: "folklore",
+  //     img: "/assets/album-cover/8.jpg",
+  //     path: "/assets/song/14 betty.m4a"
+  //   },{
+  //     title: "Beautiful Ghosts",
+  //     subtitle: "Singles",
+  //     img: "/assets/gallery/197725.jpg",
+  //     path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
+  //   },{
+  //   title: "Back To December",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Back To December.mp3"
+  //   },
+  //   {
+  //     title: "Better Than Revenge",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Better Than Revenge.mp3"
+  //   },
+  //   {
+  //     title: "Dear John",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Dear John.mp3"
+  //   },
+  //   {
+  //     title: "Enchanted",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Enchanted.mp3"
+  //   },
+  //   {
+  //     title: "Haunted",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Haunted.mp3"
+  //   },
+  //   {
+  //     title: "If This Was A Movie",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/If This Was A Movie.mp3"
+  //   },
+  //   {
+  //     title: "Last Kiss",
+  //     subtitle: "Speak Now",
+  //     img: "/assets/album-cover/3.jpeg",
+  //     path: "/assets/song/Speak Now/Last Kiss.mp3"
+  //   }
+  // ];
   
   songSelected:any;
   routes: any;
@@ -122,6 +122,7 @@ export class SongsPage implements OnInit {
   upNextImg:any;
 
   currSong: any;
+  myfolder:any;
   
   topratedSong:any=[];
   constructor(public router:Router, private dataservice:DataService, private firestore:Firestore) {
@@ -131,9 +132,16 @@ export class SongsPage implements OnInit {
     slidesPerView: 1.5
   }
   ngOnInit() {
-    this.dataservice.getSong().subscribe((res)=>{
+    this.myfolder='Taylor Swift';
+    this.readSongsFromDataService(this.myfolder);
+    // this.topratedSong = [];
+  }
+
+  readSongsFromDataService(folderref:string){
+    this.dataservice.getSong(folderref).subscribe((res)=>{
       this.topratedSong=res;
     });
+    console.log(folderref);
   }
 
   sToTime(t:any) {

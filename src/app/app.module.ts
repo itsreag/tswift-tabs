@@ -8,10 +8,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-//import { environment } from '../environments/environment';
-//import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
-//import { getFirestore, provideFirestore } from '@angular/fire/firestore'
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'
 
 
 @NgModule({
@@ -24,7 +23,8 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     ReactiveFormsModule,
-    //provideFirestore(() => getFirestore())
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

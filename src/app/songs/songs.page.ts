@@ -1,6 +1,17 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
 import { IonRange } from "@ionic/angular";
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../services/data.service';
+import {Firestore,collection, collectionData} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+export interface toprated {
+  id?: string;
+  subtitle: string;
+  imgpath: string;
+  path: string;
+}
+
 
 @Component({
   selector:'app-songs',
@@ -9,24 +20,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SongsPage implements OnInit {
   @ViewChild("range", { static: false }) range!: IonRange;
-  songs = [
-    {
-      title: "The Archer",
-      subtitle: "Lover",
-      img: "/assets/album-cover/7.jpeg",
-      path: "/assets/song/The Archer.m4a"
-    },{
-      title: "Betty",
-      subtitle: "folklore",
-      img: "/assets/album-cover/8.jpg",
-      path: "/assets/song/14 betty.m4a"
-    },{
-      title: "Beautiful Ghosts",
-      subtitle: "Singles",
-      img: "/assets/gallery/197725.jpg",
-      path: "/assets/song/01 Beautiful Ghosts (From the Motion.m4a"
-    }
-  ];
+
+ 
   songSelected:any;
   routes: any;
   //Current song details
@@ -57,13 +52,21 @@ export class SongsPage implements OnInit {
   upNextImg:any;
 
   currSong: any;
+  topratedSong:any=[];
+  constructor(public router:Router, private dataservice:DataService, private firestore:Firestore) {
+    
+  }
   
-  constructor(public router:Router) { }
   slidesOptions = {
     slidesPerView: 1.5
   }
   ngOnInit() {
+    this.dataservice.getSong().subscribe((res)=>{
+      this.topratedSong=res;
+    });
   }
+
+  
   
   sToTime(t:any) {
     return this.padZero(parseInt(String((t / (60)) % 60))) + ":" +
@@ -99,19 +102,19 @@ export class SongsPage implements OnInit {
 
       //set upnext song
       //get current song index
-      var index = this.songs.findIndex(x => x.title == this.currTitle);
+      var index = this.topratedSong.findIndex((x: { id: any; }) =>x.id == this.currTitle);
       //if current song is the last one then set first song info for upnext song
-      if ((index + 1) == this.songs.length) {
-        this.upNextImg = this.songs[0].img;
-        this.upNextTitle = this.songs[0].title;
-        this.upNextSubtitle = this.songs[0].subtitle;
+      if ((index + 1) == this.topratedSong.length) {
+        this.upNextImg = this.topratedSong[0].imgpath;
+        this.upNextTitle = this.topratedSong[0].id;
+        this.upNextSubtitle = this.topratedSong[0].subtitle;
       }
 
       //else set next song info for upnext song
       else {
-        this.upNextImg = this.songs[index + 1].img;
-        this.upNextTitle = this.songs[index + 1].title;
-        this.upNextSubtitle = this.songs[index + 1].subtitle;
+        this.upNextImg = this.topratedSong[index + 1].imgpath;
+        this.upNextTitle = this.topratedSong[index + 1].id;
+        this.upNextSubtitle = this.topratedSong[index + 1].subtitle;
       }
       this.isPlaying = true;
     })
@@ -139,27 +142,29 @@ export class SongsPage implements OnInit {
   }
 
   playNext() {
-    var index = this.songs.findIndex(x => x.title == this.currTitle);
+    // var index = this.songs.findIndex(x => this.topratedSong.id == this.currTitle);
+    var index = this.topratedSong.findIndex((x: { id: any; })=>x.id==this.currTitle);
 
-    if ((index + 1) == this.songs.length) {
-      this.playSong(this.songs[0].title, this.songs[0].subtitle, this.songs[0].img, this.songs[0].path);
+    if ((index + 1) == this.topratedSong.length) {
+      this.playSong(this.topratedSong[0].id, this.topratedSong[0].subtitle, this.topratedSong[0].imgpath, this.topratedSong[0].path);
     }
     else {
       var nextIndex = index + 1;
-      this.playSong(this.songs[nextIndex].title, this.songs[nextIndex].subtitle, this.songs[nextIndex].img, this.songs[nextIndex].path);
+      this.playSong(this.topratedSong[nextIndex].id, this.topratedSong[nextIndex].subtitle, this.topratedSong[nextIndex].imgpath, this.topratedSong[nextIndex].path);
     }
   }
 
   playPrev() {
-    var index = this.songs.findIndex(x => x.title == this.currTitle);
-
+    // var index = this.songs.findIndex(x => this.topratedSong.id == this.currTitle);
+    var index = this.topratedSong.findIndex((x: { id: any; })=>x.id==this.currTitle);
+    
     if (index == 0) {
-      var lastIndex = this.songs.length - 1;
-      this.playSong(this.songs[lastIndex].title, this.songs[lastIndex].subtitle, this.songs[lastIndex].img, this.songs[lastIndex].path);
+      var lastIndex = this.topratedSong.length - 1;
+      this.playSong(this.topratedSong[lastIndex].id, this.topratedSong[lastIndex].subtitle, this.topratedSong[lastIndex].imgpath, this.topratedSong[lastIndex].path);
     }
     else {
       var prevIndex = index - 1;
-      this.playSong(this.songs[prevIndex].title, this.songs[prevIndex].subtitle, this.songs[prevIndex].img, this.songs[prevIndex].path);
+      this.playSong(this.topratedSong[prevIndex].id, this.topratedSong[prevIndex].subtitle, this.topratedSong[prevIndex].imgpath, this.topratedSong[prevIndex].path);
     }
   }
 
